@@ -28,7 +28,7 @@ function App() {
         setAiLoading(true);
         setAiResult(null);
 
-        fetch('http://localhost:5000/api/analyze-gap', 
+        fetch(`${import.meta.env.VITE_API_URL}/api/analyze-gap`, 
         {
             method: 'POST',
             headers: { 'Content-Type': 'application/json'},
@@ -46,7 +46,7 @@ function App() {
     };
 
     const fetchApplications = () => {
-        fetch('http://localhost:5000/api/applications')
+        fetch(`${import.meta.env.VITE_API_URL}/api/applications`)
             .then(res => res.json())
             .then(data => setApplications(data))
             .catch(err => console.error('Error Fetching Applications', err));
@@ -74,7 +74,7 @@ function App() {
         e.preventDefault();
 
         if (editingId) {
-            fetch(`http://localhost:5000/api/applications/${editingId}`, {
+            fetch(`${import.meta.env.VITE_API_URL}/api/applications/${editingId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
@@ -86,7 +86,7 @@ function App() {
                 })
                 .catch(err => console.error('Error Updating Application', err));
         } else {
-            fetch('http://localhost:5000/api/applications', {
+            fetch(`${import.meta.env.VITE_API_URL}/api/applications`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
@@ -101,7 +101,7 @@ function App() {
     };
 
     const handleDelete = (id) => {
-        fetch(`http://localhost:5000/api/applications/${id}`, {
+        fetch(`${import.meta.env.VITE_API_URL}/api/applications/${id}`, {
             method: 'DELETE'
         })
             .then(() => fetchApplications())
